@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ Hàng - HTBILLIARD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Style bổ sung cho trang giỏ hàng */
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--dark-soft);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .cart-table th {
+            border-bottom: 1px solid var(--gold);
+            padding: 15px;
+            color: var(--gold);
+            text-align: left;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+        .cart-table td {
+            padding: 20px 15px;
+            border-bottom: 1px solid #222;
+            vertical-align: middle;
+        }
+        .qty-input {
+            background: #000;
+            border: 1px solid #333;
+            color: #fff;
+            width: 60px;
+            padding: 8px;
+            text-align: center;
+            border-radius: 4px;
+        }
+        .remove-btn {
+            color: #ff4d4d;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .remove-btn:hover {
+            color: #ff0000;
+            transform: scale(1.2);
+        }
+        .checkout-input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            background: #000;
+            border: 1px solid #333;
+            color: #fff;
+            border-radius: 4px;
+        }
+        .checkout-input:focus {
+            border-color: var(--gold);
+            outline: none;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container main-nav">
+            <div class="logo">
+                <a href="index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                    HT<span>BILLIARD</span>
+                </a>
+            </div>
+            <ul class="menu">
+                <li class="menu-item"><a href="index.html">Trang chủ</a></li>
+                <li class="menu-item"><a href="co-bida.html">Gậy Bi-a</a></li>
+                <li class="menu-item"><a href="phu-kien.html">Phụ kiện</a></li>
+                <li class="menu-item"><a href="ban-bida.html">Bàn Bi-a</a></li>
+                <li class="menu-item"><a href="lien-he.html">Liên hệ</a></li>
+            </ul>
+            <div class="header-icons">
+                <a href="gio-hang.html" style="position:relative; color: var(--gold);"><i class="fa fa-shopping-cart"></i></a>
+                <a href="login.html" id="user-auth-area"><i class="fa fa-user"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container" style="padding: 60px 20px 100px;">
+        <h1 style="text-align: center; margin-bottom: 40px; color: var(--gold); letter-spacing: 2px;">GIỎ HÀNG CỦA BẠN</h1>
+        
+        <div style="display: grid; grid-template-columns: 1fr; gap: 30px;" id="cart-wrapper">
+            <div id="cart-content" style="display: grid; grid-template-columns: 1fr 350px; gap: 30px;">
+                
+                <div>
+                    <table class="cart-table">
+                        <thead>
+                            <tr>
+                                <th>Sản phẩm</th>
+                                <th>Giá</th>
+                                <th>Số lượng</th>
+                                <th>Tổng</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="cart-body">
+                            </tbody>
+                    </table>
+                    <div style="margin-top: 20px;">
+                        <a href="co-bida.html" style="color: var(--gold); text-decoration: none;"><i class="fa fa-arrow-left"></i> Tiếp tục mua sắm</a>
+                    </div>
+                </div>
+
+                <div id="checkout-sidebar">
+                    <div style="background: var(--dark-soft); padding: 30px; border-radius: 8px; border: 1px solid #222; position: sticky; top: 100px;">
+                        <h3 style="margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; color: var(--gold);">TỔNG ĐƠN HÀNG</h3>
+                        
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                            <span style="color: #888;">Tạm tính:</span>
+                            <span id="cart-subtotal" style="font-weight: 600;">0₫</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                            <span style="color: #888;">Giao hàng:</span>
+                            <span style="color: #2ecc71;">Miễn phí</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.3rem; border-top: 1px solid #333; padding-top: 15px; margin-top: 15px;">
+                            <span>Tổng cộng:</span>
+                            <span id="cart-final-total" style="color: var(--gold);">0₫</span>
+                        </div>
+
+                        <div id="order-form" style="display: none; margin-top: 30px; animation: fadeIn 0.5s ease;">
+                            <h4 style="color: var(--gold); margin-bottom: 15px; text-transform: uppercase; font-size: 14px;">Thông tin nhận hàng</h4>
+                            <input type="text" id="cust-name" class="checkout-input" placeholder="Họ và tên khách hàng">
+                            <input type="tel" id="cust-phone" class="checkout-input" placeholder="Số điện thoại">
+                            <textarea id="cust-address" class="checkout-input" placeholder="Địa chỉ giao hàng chi tiết" style="height: 100px;"></textarea>
+                            
+                            <button onclick="confirmOrder()" class="btn-add-cart" style="background: #2ecc71; color: #fff;">XÁC NHẬN ĐẶT HÀNG</button>
+                            <button onclick="toggleOrderForm(false)" style="width: 100%; background: none; border: none; color: #666; margin-top: 10px; cursor: pointer;">Hủy bỏ</button>
+                        </div>
+
+                        <button id="btn-checkout-start" onclick="toggleOrderForm(true)" class="btn-add-cart" style="margin-top: 25px; padding: 15px;">TIẾN HÀNH ĐẶT HÀNG</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <div class="logo">HT<span>BILLIARD</span></div>
+                <p style="color: var(--gray); font-size: 14px; margin-top: 15px;">Hệ thống cung cấp thiết bị Billiard chuyên nghiệp.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Hotline</h4>
+                <p style="color: var(--gold); font-size: 18px; font-weight: bold;">0399.937.815</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="cart.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        // Hàm hiển thị giỏ hàng
+        function renderCart() {
+            const cart = JSON.parse(localStorage.getItem('HTB_CART')) || [];
+            const body = document.getElementById('cart-body');
+            const wrapper = document.getElementById('cart-wrapper');
+            
+            if (cart.length === 0) {
+                wrapper.innerHTML = `
+                    <div style="text-align: center; padding: 100px 0;">
+                        <i class="fa fa-shopping-basket" style="font-size: 4rem; color: #333; margin-bottom: 20px;"></i>
+                        <h2>Giỏ hàng của bạn đang trống</h2>
+                        <a href="co-bida.html" class="btn-add-cart" style="width: auto; display: inline-block; margin-top: 20px; padding: 12px 40px;">MUA SẮM NGAY</a>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                const subtotal = item.price * item.quantity;
+                total += subtotal;
+                html += `
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <img src="${item.image}" width="60" style="border-radius: 4px;">
+                                <strong>${item.name}</strong>
+                            </div>
+                        </td>
+                        <td>${formatVND(item.price)}</td>
+                        <td>
+                            <input type="number" class="qty-input" value="${item.quantity}" min="1" onchange="updateQty(${index}, this.value)">
+                        </td>
+                        <td style="color: var(--gold); font-weight: 600;">${formatVND(subtotal)}</td>
+                        <td><i class="fa fa-trash-alt remove-btn" onclick="removeItem(${index})"></i></td>
+                    </tr>
+                `;
+            });
+
+            body.innerHTML = html;
+            document.getElementById('cart-subtotal').innerText = formatVND(total);
+            document.getElementById('cart-final-total').innerText = formatVND(total);
+        }
+
+        // Ẩn/Hiện Form đặt hàng
+        function toggleOrderForm(show) {
+            const form = document.getElementById('order-form');
+            const btnStart = document.getElementById('btn-checkout-start');
+            if (show) {
+                form.style.display = 'block';
+                btnStart.style.display = 'none';
+            } else {
+                form.style.display = 'none';
+                btnStart.style.display = 'block';
+            }
+        }
+
+        // Xác nhận đặt hàng thành công
+        function confirmOrder() {
+            const name = document.getElementById('cust-name').value;
+            const phone = document.getElementById('cust-phone').value;
+            const address = document.getElementById('cust-address').value;
+
+            if (!name || !phone || !address) {
+                alert("Vui lòng điền đầy đủ thông tin để chúng tôi giao hàng!");
+                return;
+            }
+
+            // Xử lý hoàn tất
+            const wrapper = document.getElementById('cart-wrapper');
+            wrapper.innerHTML = `
+                <div style="text-align: center; padding: 80px; background: var(--dark-soft); border-radius: 8px; border: 1px solid var(--gold); animation: fadeIn 0.8s;">
+                    <i class="fa fa-check-circle" style="font-size: 5rem; color: #2ecc71; margin-bottom: 20px;"></i>
+                    <h2 style="color: var(--gold);">ĐẶT HÀNG THÀNH CÔNG!</h2>
+                    <p style="margin: 20px 0; color: #ccc;">Cảm ơn <strong>${name}</strong>. Mã đơn hàng của bạn là <strong>#HTB${Math.floor(1000 + Math.random() * 9000)}</strong>.</p>
+                    <p style="font-size: 14px; color: #888;">Chúng tôi sẽ liên hệ với bạn qua số điện thoại ${phone} để xác nhận đơn hàng.</p>
+                    <a href="index.html" class="btn-add-cart" style="width: auto; display: inline-block; margin-top: 30px; padding: 12px 50px;">QUAY VỀ TRANG CHỦ</a>
+                </div>
+            `;
+
+            // Xóa giỏ hàng
+            localStorage.removeItem('HTB_CART');
+            if(typeof updateCartIcon === 'function') updateCartIcon();
+        }
+
+        function updateQty(index, val) {
+            let cart = JSON.parse(localStorage.getItem('HTB_CART'));
+            cart[index].quantity = parseInt(val);
+            localStorage.setItem('HTB_CART', JSON.stringify(cart));
+            renderCart();
+            if(typeof updateCartIcon === 'function') updateCartIcon();
+        }
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem('HTB_CART'));
+            cart.splice(index, 1);
+            localStorage.setItem('HTB_CART', JSON.stringify(cart));
+            renderCart();
+            if(typeof updateCartIcon === 'function') updateCartIcon();
+        }
+
+        function formatVND(amount) {
+            return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+        }
+
+        document.addEventListener('DOMContentLoaded', renderCart);
+    </script>
+</body>
+</html>

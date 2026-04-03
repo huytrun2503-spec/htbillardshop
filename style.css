@@ -1,0 +1,461 @@
+/* PROJECT: HTBILLIARD Professional CSS
+   AUTHOR: Gemini Assistant
+   VERSION: 2.0 (Luxury Gold Edition)
+*/
+
+/* --- 1. IMPORT & RESET --- */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+:root {
+    --gold: #D4AF37;        /* Màu vàng đồng chính */
+    --gold-hover: #FFD700;  /* Màu vàng sáng khi hover */
+    --dark: #0a0a0a;        /* Nền tối sâu */
+    --dark-soft: #1a1a1a;   /* Nền phụ/Card */
+    --white: #ffffff;
+    --gray: #888888;
+    --red: #b91c1c;         /* Màu thông báo lỗi hoặc giá cũ */
+    --transition: 0.4s ease;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #000;
+    color: var(--white);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+ul {
+    list-style: none;
+}
+
+/* --- 2. HEADER & NAVIGATION --- */
+header {
+    background: rgba(0, 0, 0, 0.95);
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    border-bottom: 1px solid #222;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 85px;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.logo span {
+    color: var(--gold);
+}
+
+.menu {
+    display: flex;
+}
+
+.menu-item {
+    margin: 0 15px;
+    position: relative;
+}
+
+.menu-item a {
+    color: var(--white);
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.menu-item a:hover {
+    color: var(--gold);
+}
+
+/* Dropdown Menu */
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--dark-soft);
+    min-width: 220px;
+    padding: 15px 0;
+    display: none;
+    border: 1px solid #333;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+
+.menu-item:hover .dropdown {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+.dropdown li a {
+    padding: 10px 20px;
+    display: block;
+    text-transform: none;
+    font-size: 14px;
+    color: #ccc;
+}
+
+.dropdown li a:hover {
+    background: #252525;
+    color: var(--gold);
+    padding-left: 25px;
+}
+
+/* Icons area */
+.header-icons {
+    display: flex;
+    gap: 20px;
+}
+
+.header-icons a {
+    color: var(--white);
+    font-size: 18px;
+}
+
+.header-icons a:hover {
+    color: var(--gold);
+}
+
+/* --- 3. PRODUCT CARDS --- */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 30px;
+    padding: 40px 0;
+}
+
+.product-card {
+    background: var(--dark-soft);
+    border: 1px solid #222;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.product-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(212, 175, 55, 0.1);
+}
+
+.product-image {
+    width: 100%;
+    height: 280px;
+    object-fit: contain;
+    margin-bottom: 20px;
+    filter: brightness(0.9);
+    transition: 0.5s;
+}
+
+.product-card:hover .product-image {
+    filter: brightness(1.1);
+    transform: scale(1.05);
+}
+
+.product-name {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--white);
+    height: 48px;
+    overflow: hidden;
+}
+
+.product-price {
+    color: var(--gold);
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.btn-add-cart {
+    background: var(--gold);
+    color: #000;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-add-cart:hover {
+    background: var(--white);
+    color: #000;
+}
+
+/* --- 4. LOGIN / AUTH PAGE --- */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.auth-box {
+    background: var(--dark-soft);
+    padding: 40px;
+    width: 100%;
+    max-width: 450px;
+    border-radius: 12px;
+    border: 1px solid #333;
+}
+
+.auth-logo {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 800;
+    margin-bottom: 30px;
+}
+
+.auth-tabs {
+    display: flex;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #333;
+}
+
+.tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    color: var(--gray);
+    padding: 15px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.tab-btn.active {
+    color: var(--gold);
+    border-bottom: 2px solid var(--gold);
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-group i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gray);
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 14px 14px 45px;
+    background: #000;
+    border: 1px solid #333;
+    color: #fff;
+    border-radius: 4px;
+    outline: none;
+}
+
+.input-group input:focus {
+    border-color: var(--gold);
+}
+
+/* --- 5. SHOPPING CART PAGE --- */
+.cart-section {
+    padding: 80px 0;
+}
+
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+.cart-table th {
+    text-align: left;
+    border-bottom: 1px solid var(--gold);
+    padding: 15px;
+    color: var(--gold);
+    text-transform: uppercase;
+}
+
+.cart-table td {
+    padding: 20px 15px;
+    border-bottom: 1px solid #222;
+}
+
+.cart-item-img {
+    width: 80px;
+    border-radius: 4px;
+}
+
+.cart-summary {
+    background: var(--dark-soft);
+    padding: 30px;
+    border-radius: 8px;
+    float: right;
+    width: 100%;
+    max-width: 400px;
+}
+
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.summary-line.total {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--gold);
+    border-top: 1px solid #333;
+    padding-top: 15px;
+}
+
+/* --- 6. FOOTER --- */
+footer {
+    background: #050505;
+    padding: 80px 0 30px;
+    margin-top: 100px;
+    border-top: 1px solid #222;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+}
+
+.footer-col h4 {
+    color: var(--gold);
+    margin-bottom: 25px;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.footer-col ul li {
+    margin-bottom: 12px;
+}
+
+.footer-col ul li a {
+    color: var(--gray);
+}
+
+.footer-col ul li a:hover {
+    color: var(--white);
+    padding-left: 5px;
+}
+
+/* --- 7. UTILS & ANIMATIONS --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.contact-buttons {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 9999;
+}
+
+.btn-circle {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    font-size: 22px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+.btn-phone { background: var(--gold); color: #000; }
+.btn-zalo { background: #0068ff; color: #fff; font-weight: 800; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-nav { flex-direction: column; height: auto; padding: 20px 0; }
+    .menu { margin: 20px 0; flex-wrap: wrap; justify-content: center; }
+    .hero h1 { font-size: 2.5rem !important; }
+}
+/* Đảm bảo logo luôn giữ màu sắc thiết kế ngay cả khi là thẻ link */
+.logo a {
+    color: #000; /* Hoặc màu mặc định của logo bạn */
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.logo a span {
+    color: var(--gold); /* Giữ màu vàng cho chữ BILLIARD */
+}
+
+/* Hiệu ứng nhẹ khi di chuột vào logo (tùy chọn) */
+.logo a:hover {
+    opacity: 0.8;
+}
+
+/* Style cho bộ lọc */
+.filter-btn {
+    background: transparent;
+    border: 1px solid #333;
+    color: #ccc;
+    padding: 8px 25px;
+    border-radius: 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: var(--transition);
+}
+
+.filter-btn:hover, .filter-btn.active {
+    border-color: var(--gold);
+    color: var(--gold);
+}
+
+/* Hiệu ứng chớp nháy cho Flash Sale */
+@keyframes flash {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+    from { transform: translateX(-100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}

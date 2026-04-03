@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gậy Bi-a Carbon & Gỗ Ghép Chính Hãng - HTBILLIARD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* CSS nội bộ cho bộ lọc nhãn hàng */
+        .filter-container {
+            padding: 40px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: #111;
+            border: 1px solid #333;
+            color: #fff;
+            padding: 10px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .filter-btn.active {
+            background: var(--gold);
+            color: #000;
+            border-color: var(--gold);
+        }
+
+        /* Hiệu ứng mượt khi lọc sản phẩm */
+        .product-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container main-nav">
+            <div class="logo">
+                <a href="index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                    HT<span>BILLIARD</span>
+                </a>
+            </div>
+
+            <ul class="menu">
+                <li class="menu-item"><a href="index.html">Trang chủ</a></li>
+                <li class="menu-item">
+                    <a href="co-bida.html" style="color: var(--gold);">Gậy Bi-a <i class="fa fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <ul class="dropdown">
+                        <li><a href="#" onclick="filterBrands('fury', document.querySelector('.filter-btn:nth-child(2)'))">Thương hiệu Fury</a></li>
+                        <li><a href="#" onclick="filterBrands('jacoby', document.querySelector('.filter-btn:nth-child(4)'))">Thương hiệu Jacoby</a></li>
+                        <li><a href="#" onclick="filterBrands('peri', document.querySelector('.filter-btn:nth-child(3)'))">Thương hiệu Peri</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item"><a href="phu-kien.html">Phụ kiện</a></li>
+                <li class="menu-item"><a href="ban-bida.html">Bàn Bi-a</a></li>
+                <li class="menu-item"><a href="lien-he.html">Liên hệ</a></li>
+            </ul>
+
+            <div class="header-icons">
+                <a href="#"><i class="fa fa-search"></i></a>
+                <a href="gio-hang.html" style="position:relative;"><i class="fa fa-shopping-cart"></i></a>
+                <a href="login.html" id="user-auth-area"><i class="fa fa-user"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <section style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1544192627-447a4ec3a85c?q=80&w=2070') center/center; padding: 100px 0; text-align: center;">
+        <div class="container">
+            <h1 style="font-size: 3rem; text-transform: uppercase; color: var(--gold);">Gậy Bi-a Chuyên Nghiệp</h1>
+            <p style="color: #ccc;">Khám phá bộ sưu tập gậy Bi-a từ các thương hiệu hàng đầu thế giới</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="filterBrands('all', this)">Tất cả</button>
+            <button class="filter-btn" onclick="filterBrands('fury', this)">Fury</button>
+            <button class="filter-btn" onclick="filterBrands('peri', this)">Peri</button>
+            <button class="filter-btn" onclick="filterBrands('jacoby', this)">Jacoby</button>
+            <button class="filter-btn" onclick="filterBrands('carbon', this)">Gậy Carbon</button>
+        </div>
+    </div>
+
+    <section class="container" style="padding-bottom: 80px;">
+        <div class="product-grid" id="product-list">
+            
+            <div class="product-card" data-brand="fury">
+                <img src="https://xbilliard.vn/wp-content/uploads/2023/07/1-2-600x600.png" alt="Gậy Fury" class="product-image">
+                <h3 class="product-name">Gậy Fury Carbon AK-Series 2026</h3>
+                <p class="product-price">12.500.000₫</p>
+                <button class="btn-add-cart" data-id="f1" data-price="12500000" data-name="Fury Carbon AK">Thêm vào giỏ</button>
+            </div>
+
+            <div class="product-card" data-brand="peri">
+                <img src="https://xbilliard.vn/wp-content/uploads/2023/07/1-16-1536x1536.png" alt="Gậy Peri" class="product-image">
+                <h3 class="product-name">Gậy Peri Luxury P-L01</h3>
+                <p class="product-price">45.000.000₫</p>
+                <button class="btn-add-cart" data-id="p1" data-price="45000000" data-name="Peri Luxury P-L01">Thêm vào giỏ</button>
+            </div>
+
+            <div class="product-card" data-brand="jacoby">
+                <img src="https://ozonebilliards.com/cdn/shop/files/851_b763c115-0293-45e7-9d8d-b7dc373f2628.jpg?v=1751292092&width=768" alt="Gậy Jacoby" class="product-image">
+                <h3 class="product-name">Gậy Jacoby Custom Blue Hour</h3>
+                <p class="product-price">28.000.000₫</p>
+                <button class="btn-add-cart" data-id="j1" data-price="28000000" data-name="Jacoby Custom Blue">Thêm vào giỏ</button>
+            </div>
+
+            <div class="product-card" data-brand="carbon">
+                <img src="https://xbilliard.vn/wp-content/uploads/2023/07/1-11-600x600.png" alt="Gậy Carbon" class="product-image">
+                <h3 class="product-name">Ngọn Carbon Rhino Tech 12.4mm</h3>
+                <p class="product-price">6.500.000₫</p>
+                <button class="btn-add-cart" data-id="c1" data-price="6500000" data-name="Ngọn Carbon Rhino">Thêm vào giỏ</button>
+            </div>
+
+            <div class="product-card" data-brand="fury">
+                <img src="https://xbilliard.vn/wp-content/uploads/2023/07/1-10-600x600.png" alt="Gậy Fury" class="product-image">
+                <h3 class="product-name">Gậy Fury ZS-Series 2025</h3>
+                <p class="product-price">8.900.000₫</p>
+                <button class="btn-add-cart" data-id="f2" data-price="8900000" data-name="Fury ZS-Series">Thêm vào giỏ</button>
+            </div>
+
+            <div class="product-card" data-brand="peri">
+                <img src="https://xbilliard.vn/wp-content/uploads/2023/07/1-13-600x600.png" alt="Gậy Peri" class="product-image">
+                <h3 class="product-name">Gậy Peri EX-Series Carbon</h3>
+                <p class="product-price">18.200.000₫</p>
+                <button class="btn-add-cart" data-id="p2" data-price="18200000" data-name="Peri EX Carbon">Thêm vào giỏ</button>
+            </div>
+
+            <div class="product-card" data-brand="fury">
+                <img src="https://xbilliard.vn/wp-content/uploads/2026/01/1-12-500x500.jpg" alt="Gậy Fury" class="product-image">
+                <h3 class="product-name">Gậy Fury CS 05-11</h3>
+                <p class="product-price">6.900.000₫</p>
+                <button class="btn-add-cart" data-id="f3" data-price="6900000" data-name="Fury CS 05-11">Thêm vào giỏ</button>
+            </div>
+
+            <div class="product-card" data-brand="fury">
+                <img src="https://xbilliard.vn/wp-content/uploads/2026/01/2-13-500x500.jpg" alt="Gậy Fury" class="product-image">
+                <h3 class="product-name">Gậy Bida Fury AM11</h3>
+                <p class="product-price">55.900.000₫</p>
+                <button class="btn-add-cart" data-id="f4" data-price="55900000" data-name="Fury AM11">Thêm vào giỏ</button>
+            </div>
+
+            <div class="product-card" data-brand="peri">
+                <img src="https://xbilliard.vn/wp-content/uploads/2023/12/1-500x500.png" alt="Gậy Peri" class="product-image">
+                <h3 class="product-name">Gậy Bi a Peri P-D10</h3>
+                <p class="product-price">5.200.000₫</p>
+                <button class="btn-add-cart" data-id="p3" data-price="5200000" data-name="Peri P-D10">Thêm vào giỏ</button>
+            </div>
+            
+            <div class="product-card" data-brand="peri">
+                <img src="https://xbilliard.vn/wp-content/uploads/2023/07/1-13-500x500.png" alt="Gậy Peri" class="product-image">
+                <h3 class="product-name">Gậy Bi A Peri ST</h3>
+                <p class="product-price">8.200.000₫</p>
+                <button class="btn-add-cart" data-id="p4" data-price="8200000" data-name="Peri ST">Thêm vào giỏ</button>
+            </div>
+
+            <div class="product-card" data-brand="carbon">
+                <img src="https://rhinobilliards.vn/cdn/shop/files/MUST4CUE2_51ea411b-ddf3-401a-916c-b967e7cd621b.jpg?v=1767412661&width=540" alt="Gậy Carbon" class="product-image">
+                <h3 class="product-name">GẬY ĐÁNH RHINO MUST MU4 VERDE MULTIVENEER</h3>
+                <p class="product-price">13.500.000₫</p>
+                <button class="btn-add-cart" data-id="c1" data-price="13500000" data-name="Ngọn Carbon Rhino">Thêm vào giỏ</button>
+            </div>
+
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <div class="logo">HT<span>BILLIARD</span></div>
+                <p style="color: var(--gray); font-size: 14px; margin-top: 15px;">Chuyên cung cấp gậy bida Carbon, gậy bida gỗ chính hãng các dòng Fury, Peri, Jacoby.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Hotline hỗ trợ</h4>
+                <p style="color: var(--gray); font-size: 14px; margin-bottom: 10px;"><i class="fa fa-phone" style="color: var(--gold);"></i> 0399.937.815</p>
+                <p style="color: var(--gray); font-size: 14px;"><i class="fa fa-shield-alt" style="color: var(--gold);"></i> Bảo hành 12 tháng</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="contact-buttons">
+        <a href="tel:0399937815" class="btn-circle btn-phone"><i class="fa fa-phone"></i></a>
+        <a href="https://zalo.me/0399937815" class="btn-circle btn-zalo">Z</a>
+    </div>
+
+    <script src="cart.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        function filterBrands(brand, btn) {
+            // Cập nhật trạng thái nút Active
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            // Lọc sản phẩm
+            const products = document.querySelectorAll('.product-card');
+            
+            products.forEach(product => {
+                const productBrand = product.getAttribute('data-brand');
+                
+                // Hiệu ứng Fade Out
+                product.style.opacity = '0';
+                product.style.transform = 'scale(0.95)';
+                
+                setTimeout(() => {
+                    if (brand === 'all' || productBrand === brand) {
+                        product.style.display = 'block';
+                        setTimeout(() => {
+                            product.style.opacity = '1';
+                            product.style.transform = 'scale(1)';
+                        }, 50);
+                    } else {
+                        product.style.display = 'none';
+                    }
+                }, 300);
+            });
+        }
+    </script>
+</body>
+</html>

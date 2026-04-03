@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập & Đăng ký - HTBILLIARD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Style đặc thù cho trang Auth để tối ưu trải nghiệm */
+        body {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+                        url('https://images.unsplash.com/photo-1538391136203-461327f27663?q=80&w=2070') center/cover no-repeat;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .auth-box {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+            animation: slideUp 0.4s ease;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 12px;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .auth-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+
+        .auth-options a {
+            color: var(--gray);
+        }
+
+        .auth-options a:hover {
+            color: var(--gold);
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="auth-container">
+        <div class="auth-box">
+            <div class="auth-logo">HT<span>BILLIARD</span></div>
+            
+            <div class="auth-tabs">
+                <button class="tab-btn active" onclick="toggleAuth('login')">Đăng nhập</button>
+                <button class="tab-btn" onclick="toggleAuth('register')">Đăng ký</button>
+            </div>
+
+            <form id="login-form" class="auth-form active">
+                <div class="input-group">
+                    <label>Email / Số điện thoại</label>
+                    <i class="fa fa-envelope"></i>
+                    <input type="email" placeholder="example@gmail.com" required>
+                </div>
+                
+                <div class="input-group">
+                    <label>Mật khẩu</label>
+                    <i class="fa fa-lock"></i>
+                    <input type="password" placeholder="••••••••" required>
+                </div>
+
+                <div class="auth-options">
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input type="checkbox"> Ghi nhớ tôi
+                    </label>
+                    <a href="#">Quên mật khẩu?</a>
+                </div>
+
+                <button type="submit" class="btn-add-cart" style="padding: 15px;">Đăng nhập ngay</button>
+                
+                <div style="text-align: center; margin-top: 25px;">
+                    <p style="font-size: 13px; color: #666;">Hoặc đăng nhập bằng</p>
+                    <div style="display: flex; justify-content: center; gap: 15px; margin-top: 15px;">
+                        <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: #3b5998; color: #fff; display: flex; align-items: center; justify-content: center;"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: #db4437; color: #fff; display: flex; align-items: center; justify-content: center;"><i class="fab fa-google"></i></a>
+                    </div>
+                </div>
+            </form>
+
+            <form id="register-form" class="auth-form">
+                <div class="input-group">
+                    <label>Họ và tên</label>
+                    <i class="fa fa-user"></i>
+                    <input type="text" placeholder="Nguyễn Văn A" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Số điện thoại</label>
+                    <i class="fa fa-phone"></i>
+                    <input type="tel" placeholder="0399.xxx.xxx" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Email</label>
+                    <i class="fa fa-envelope"></i>
+                    <input type="email" placeholder="example@gmail.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Mật khẩu</label>
+                    <i class="fa fa-lock"></i>
+                    <input type="password" placeholder="Tối thiểu 6 ký tự" required>
+                </div>
+
+                <p style="font-size: 12px; color: #666; margin-bottom: 20px; text-align: center;">
+                    Bằng cách đăng ký, bạn đồng ý với <a href="#" style="color: var(--gold);">Điều khoản dịch vụ</a> của chúng tôi.
+                </p>
+
+                <button type="submit" class="btn-add-cart" style="padding: 15px;">Tạo tài khoản</button>
+            </form>
+
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="index.html" style="color: var(--gray); font-size: 14px;">
+                    <i class="fa fa-arrow-left"></i> Quay lại cửa hàng
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleAuth(type) {
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            const tabs = document.querySelectorAll('.tab-btn');
+
+            if (type === 'login') {
+                loginForm.classList.add('active');
+                registerForm.classList.remove('active');
+                tabs[0].classList.add('active');
+                tabs[1].classList.remove('active');
+            } else {
+                loginForm.classList.remove('active');
+                registerForm.classList.add('active');
+                tabs[1].classList.add('active');
+                tabs[0].classList.remove('active');
+            }
+        }
+    </script>
+
+    <script src="auth.js"></script>
+</body>
+</html>
